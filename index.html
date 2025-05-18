@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<!-- Кнопка NEXT (перемещена вниз, центр) -->
+<div class="btn-conteiner">
+    <a class="btn-content" href="about.html">
+        <span class="btn-title">NEXT</span>
+        <span class="icon-arrow">
+            <svg width="66px" height="43px" viewBox="0 0 66 43" xmlns="http://www.w3.org/2000/svg">
+                <g id="arrow" fill="none" fill-rule="evenodd">
+                    <path id="arrow-icon-one" d="M40.15 3.89L43.97 0.14L65.69 20.78L44.67 42.86L40.15 39.1L56.99 21.85L40.15 4.6Z" fill="#FFFFFF"></path>
+                    <path id="arrow-icon-two" d="M20.15 3.89L23.97 0.14L45.69 20.78L24.67 42.86L20.15 39.1L36.99 21.85L20.15 4.6Z" fill="#FFFFFF"></path>
+                    <path id="arrow-icon-three" d="M0.15 3.89L3.97 0.14L25.69 20.78L4.67 42.86L0.15 39.1L16.99 21.85L0.15 4.6Z" fill="#FFFFFF"></path>
+                </g>
+            </svg>
+        </span>
+    </a>
+</div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="glass-panel"></div>
+</body>
+</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body
+        
+        {
+            
+            font-family: "Anton", sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            height: 190vh;
+            position: relative;
+            color: rgb(249, 247, 255);
+        }
+        /* Видеофон */
+        .background-video {
+    position: fixed; /* Фиксируем видео, чтобы оно не двигалось */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Растягиваем видео на весь экран */
+    object-fit: cover; /* Сохраняем пропорции */
+    z-index: -2; /* Оставляем видео на заднем плане */
+    clip-path: inset(0 100 10% 0); /* Обрезка видео (настрой под себя) */
+}
+
+        /* Затемняющий слой */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 141px 30px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.447);
+            z-index: -1;
+            clip-path: inset(0 10 10% 0); /* Обрезка видео (настрой под себя) */
+        } 
+     
+
+
+        .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    position: fixed; /* Фиксируем панель */
+    top: 0;
+    left: 0;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0 0 15px 15px;
+    z-index: 1000; /* Поднимаем панель наверх */
+}
+
+/* Исправляем навигацию */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 40px; /* Уменьшаем расстояние */
+}
+
+.nav ul li {
+    list-style: none;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: rgba(194, 160, 242, 0.9); /* Цвет текста */
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 8px 15px;
+    transition: color 0.3s, transform 0.3s, border-bottom 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.nav ul li a:hover,
+.nav ul li a.active {
+    color: rgb(148, 112, 255);
+    transform: scale(1.1);
+    border-bottom: 3px solid rgb(168, 115, 253);
+}
+
+        /* Логотип "Bogdan" */
+        .logo {
+            text-decoration: none;
+            color: rgb(209, 177, 255); /* Used the logo color */
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .logo:hover {
+            color: rgb(209, 177, 255); /* Used the logo color */
+            transform: scale(1.1);
+        }
+
+        /* Навигация */
+        .nav {
+            position: absolute;
+            top: 50%;
+            right: 36%; /* Сдвиг в правую часть */
+            transform: translateY(-50%);
+        }
+
+        .nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: rgba(194, 160, 242, 0.458); /* Used the logo color */
+            font-size: 1.3em;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: color 0.3s, transform 0.3s, border-bottom 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav ul li a:hover,
+        .nav ul li a.active {
+            color: rgb(148, 112, 255); /* Used the logo color */
+            transform: scale(1.1);
+            border-bottom: 3px solid rgb(168, 115, 253); /* Подчеркивание при наведении */
+        }
+
+        /* Главная секция */
+        .home-content {
+    position: absolute;
+    top: -700%; /* Поднять выше */
+    left: -500%; /* Переместить в центр */
+    text-align: relative; /* Выравнивание текста по центру */
+}
+
+        section {
+            min-height: 100vh;
+            padding: 4rem 4% 4rem;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+            padding-top: 6%;
+        }
+
+        /* Вертикальная линия */
+        .home-content::before {
+            content: "";
+            position: absolute;
+            left: -15%;
+            top: 56%;
+            transform: translate(-50%, -50%);
+            height: 250px;
+            width: 3px;
+            background-color: rgb(209, 177, 255); /* Цвет линии */
+            z-index: -1;
+        }
+
+        .home-img img {
+            position: relative;
+            width: 33vw;
+            top: -20vw;
+            border-radius: 70%;
+            box-shadow: 0 0 203px solid rgb(255, 13, 13);
+            cursor: pointer;
+            transition: 0.2999s linear;
+            margin-left: 50vw;
+            animation: fireAnimation 1.5s infinite alternate;
+        }
+
+
+        .home-img img:hover {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .home-content {
+            position: absolute;
+            top: 45%;
+            left: 14%;
+            transform: translateY(-50%);
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        span {
+            color: rgb(255, 255, 255);
+        }
+
+        .home-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .home-content p {
+            font-size: 1.3rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 3rem;
+            height: 3rem;
+            background-color: transparent;
+            border: 0.2rem solid rgb(209, 177, 255);
+            font-size: 1.6rem;
+            border-radius: 50%;
+            margin: 1.5rem 0.8rem 1.5rem 0;
+            transition: 0.3s ease;
+            color: rgb(209, 177, 255);
+            text-decoration: none;
+        }
+        .typing-text span::before {
+            content: "Web Developer";
+            color: rgb(201, 162, 255);
+            animation: words 7s infinite steps(1);
+        }
+
+        .typing-text span::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 100%;
+        }
+
+        @keyframes cursor {
+            to {
+                border-left: 3px solid rgb(254, 254, 255);
+            }
+        }
+
+        @keyframes words {
+            0%, 16.6% { content: "student"; }
+            16.7%, 33.3% { content: "boy"; }
+            33.4%, 50% { content: "talented"; }
+            50.1%, 66.6% { content: "sport men"; }
+            66.7%, 83.3% { content: "design"; }
+            83.4%, 100% { content: "friend"; }
+        }
+       body {
+            display: fixed;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://source.unsplash.com/random/1600x900') no-repeat center center/cover;
+            margin: 0;
+
+        }
+        .glass-panel {
+    width: 1200px;
+    height: 400px;
+    background: rgba(95, 73, 138, 0.489);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+
+    /* Делаем верхние углы полукруглыми */
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    
+    /* Нижние углы оставляем острыми (по умолчанию) */
+}
+  </style>
+</head>
+<body>
+    <!-- Видеофон -->
+    <video class="background-video" autoplay muted loop>
+        <source src="3163534-uhd_3840_2160_30fps.mp4" type="video/mp4">
+    </video>
+
+    <!-- Затемняющий слой -->
+    <div class="overlay"></div>
+
+    <!-- Верхняя панель -->
+    <div class="header">
+        <a href="index.html" class="logo">Bogdan</a>
+        <div class="nav">
+            <ul>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="contacts.html">Contact Me</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Главная секция -->
+    <section>
+        </div>
+        <div class="home-content">
+            <h1>Hi, It's <span>Bogdan</span></h1>
+            <h3 class="typing-text">I'm a <span></span></h3>
+            <div class="social-icons">
+                <a href="https://www.behance.net/bogdanz3"><i class="fa-brands fa-behance"></i></a>
+                <a href="https://t.me/zmeev_bog"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.instagram.com/ta1entum_11?igsh=MXdkdGkxN2N5MWMxZg%3D%3D&utm_source=qr"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+     <style>
+        /* работа с цветом кнопок тг инсты и т д */
+        .social-icons a:hover {
+            color: black;
+            transform: scale(1.2) translateY(-5px);
+            background-color: rgb(209, 177, 255); 
+            box-shadow: 0 0 20px rgb(210, 109, 250); 
+        }
+
+        .btn-conteiner {
+            display: flex;
+            justify-content: flex-start; 
+            --color-text: #29032f;
+            --color-background: #9740bffd;
+            --color-outline: #41115a;
+            --color-shadow: #00000024;
+        }
+
+        .btn-content {
+            display: flex;
+            align-items: center;
+            padding: 5px 30px;
+            text-decoration: none;
+
+            font-weight: 6000;
+            font-size: 30px;
+            color: var(--color-text);
+            background: var(--color-background);
+            transition: 1s;
+            border-radius: 100px;
+            box-shadow: 0 0 0.2em 0 var(--color-background);
+        }
+
+        .btn-content:hover, .btn-content:focus {
+            transition: 0.5s;
+            animation: btn-content 1s;
+            outline: 0.1em solid transparent;
+            outline-offset: 0.2em;
+            box-shadow: 0 0 0.4em 0 var(--color-background);
+        }
+
+        .btn-content .icon-arrow {
+            transition: 0.5s;
+            margin-right: 0px;
+            transform: scale(0.6);
+        }
+
+        .btn-content:hover .icon-arrow {
+            margin-right: 25px;
+        }
+
+        .icon-arrow {
+            width: 20px;
+            margin-left: 15px;
+            position: relative;
+            top: 6%;
+        }
+
+        #arrow-icon-one { transform: translateX(-60%); transition: 0.4s; }
+        #arrow-icon-two { transform: translateX(-30%); transition: 0.5s; }
+        .btn-content:hover #arrow-icon-three { animation: color_anim 1s infinite 0.2s; }
+        .btn-content:hover #arrow-icon-one { transform: translateX(0%); animation: color_anim 1s infinite 0.6s; }
+        .btn-content:hover #arrow-icon-two { transform: translateX(0%); animation: color_anim 1s infinite 0.4s; }
+
+        @keyframes color_anim {
+            0%, 100% { fill: rgb(211, 145, 253); } /* Цвет стрелки, такой же как у лого */
+            50% { fill: var(--color-background); }
+        }
+
+        @keyframes btn-content {
+            0% { outline: 0.2em solid rgb(209, 177, 255); outline-offset: 0; }
+        }
+        .btn-conteiner {
+    position: fixed; /* Фиксируем кнопку на экране */
+    bottom: 20px; /* Отступ снизу */
+    left: 50%; /* Размещаем в центре */
+    transform: translateX(-50%); /* Смещаем кнопку обратно на половину ее ширины */
+    z-index: 1000; /* Чтобы кнопка была поверх остальных элементов */
+}
+html, body {
+    height: 100%; /* Убедиться, что страница занимает всю высоту */
+    overflow-y: auto; /* Разрешить вертикальную прокрутку */
+}
+    </style>
+</head>
+</html>
